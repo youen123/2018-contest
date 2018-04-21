@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>2048</h1>
+            <div>
+                <span>score:</span>
+                <span id="score">0</span>
+            </div>
+        </header>
+        <button id="start_btn">新游戏</button>
+        <p>按上下左右键进行游戏</p>
+        <div class="game-container">
+            <div class="board-container">
+                <div class="row">
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                </div>
+                <div class="row">
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                </div>
+                <div class="row">
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                </div>
+                <div class="row">
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                    <div class="grid-col"></div>
+                </div>
+            </div>
+            <div id="cube-container"></div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+    <script src="cube.js"></script>
+</body>
+
+</html>
