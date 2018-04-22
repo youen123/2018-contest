@@ -8,10 +8,20 @@ function Cube(x, y, val) {
 
 Cube.prototype.create = function() {
     var div = document.createElement('div');
-    div.classList.add('cube', 'appear', 'p-' + this.x + '-' + this.y, 'cube-' + this.val);
-    div.innerText = this.val;
+    var divin = document.createElement('div');
+    div.classList.add('p-' + this.x + '-' + this.y, 'cube-box');
+    divin.classList.add('appear', 'cube', 'cube-' + this.val);
+    divin.innerText = this.val;
+    // merge 效果结束之后就清除
+    divin.addEventListener("webkitAnimationEnd",function(e){
+      if (e.animationName === "pop") {
+        divin.classList.remove('cube-merge');
+      }
+    },false);
+    div.appendChild(divin);
     el.appendChild(div);
     this.el = div;
+    this.innerCube = divin;
 }
 
 Cube.prototype.update = function(x, y, val) {
@@ -22,10 +32,10 @@ Cube.prototype.update = function(x, y, val) {
         this.y = y; 
     }
     if (typeof val != 'undefined' && val != this.val) {
-        this.el.classList.remove('cube-' + this.val);
-        this.el.classList.add('cube-' + val);
-        this.el.innerText = val;
+        this.innerCube.classList.remove('cube-' + this.val);
+        this.innerCube.innerText = val;
         this.val = val;
+        this.innerCube.classList.add('cube-' + val, 'cube-merge');
     }
 }
 Cube.prototype.clear = function() {

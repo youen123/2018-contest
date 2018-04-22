@@ -10,22 +10,26 @@ btn.addEventListener('click', function() {
 })
 
 document.addEventListener("keydown", function (event) {
-    event.preventDefault();
+    
     if (!game) {
         game = new Game();
     }
     switch(event.keyCode) {
         case 40: 
             game.move(3);
+            event.preventDefault();
             break;
         case 38:
             game.move(2);
+            event.preventDefault();
             break;
         case 37:
             game.move(0);
+            event.preventDefault();
             break;
         case 39:
             game.move(1);
+            event.preventDefault();
             break;
     }
   });
