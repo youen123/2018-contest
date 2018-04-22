@@ -46,10 +46,11 @@ Game.prototype.reset = function() {
 Game.prototype.start = function() {
     this.board.addNew();
     this.board.addNew();
+    this.updateInfo();
 }
 
 Game.prototype.move = function(dirc) {
-    if (this.state == 'finished') {
+    if (this.state == 'finished' || !this.canMove(dirc)) {
         return;
     }
     switch(dirc) {
@@ -68,6 +69,81 @@ Game.prototype.move = function(dirc) {
     }
     this.board.addNew();
     this.updateInfo();
+}
+Game.prototype.canMove = function(dirc) {
+    if (dirc == 0) {
+        for (var i = 0; i < this.board.size; i++) {
+            var j = 0;
+            while(j < this.board.size && this.board.cells[i][j]) {
+                if (j > 0 && this.board.cells[i][j].val == this.board.cells[i][j - 1].val) {
+                    return true;
+                }
+                j++;
+
+            }
+            while(j < this.board.size && !this.board.cells[i][j]) {
+                j++;
+            }
+            if (j < this.board.size) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if (dirc == 1) {
+        for (var i = 0; i < this.board.size; i++) {
+            var j = this.board.size - 1;
+            while(j >= 0 && this.board.cells[i][j]) {
+                if (j < this.board.size - 1 && this.board.cells[i][j].val == this.board.cells[i][j + 1].val) {
+                    return true;
+                }
+                j--;
+            }
+            while(j >= 0 && !this.board.cells[i][j]) {
+                j--;
+            }
+            if (j >= 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if (dirc == 2) {
+        for (var i = 0; i < this.board.size; i++) {
+            var j = 0;
+            while(j < this.board.size && this.board.cells[j][i]) {
+                if (j > 0 && this.board.cells[j][i].val == this.board.cells[j - 1][i].val) {
+                    return true;
+                }
+                j++;
+            }
+            while(j < this.board.size && !this.board.cells[j][i]) {
+                j++;
+            }
+            if (j < this.board.size) {
+                return true;
+            }
+        }
+        return false;
+    }
+    if (dirc == 3) {
+        for (var i = 0; i < this.board.size; i++) {
+            var j = this.board.size - 1;
+            while(j >= 0 && this.board.cells[j][i]) {
+                if (j < this.board.size - 1 && this.board.cells[j][i].val == this.board.cells[j + 1][i].val) {
+                    return true;
+                }
+                j--;
+            }
+            while(j >= 0 && !this.board.cells[j][i]) {
+                j--;
+            }
+            if (j >= 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 Game.prototype.moveLeft = function() {
